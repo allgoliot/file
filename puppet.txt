@@ -1,0 +1,6 @@
+serveur : 
+docker run -it --rm --name serveurpuppet -h master.test.com devopsil/puppet
+
+
+client : 
+docker run -it --rm --name clientpupper -h slave.test.com devopsil/puppet
