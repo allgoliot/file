@@ -60,4 +60,15 @@ fichier.pp { '/etc/site-conf'
 }
 
 
+utilisateur.pp 
+user { 'toto' : 
+	ensure=>'present',
+	comment=>'mon premier user',
+	password=>'monpass'
+	}
+group { 'users' :
+	ensure=>'present'
+	}
+
+
 
