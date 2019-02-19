@@ -72,3 +72,33 @@ group { 'users' :
 
 
 
+creer une arboréscence 
+$dirs=['/etc/site-conf/prod','/etc/site-conf/dev','/etc/site-conf/test']
+
+file { $dirs : 
+	ensure=>'directory'
+}
+
+
+supprimer un fichier
+tidy {'/etc/site-conf/test'} 
+
+supprimer fichier d'un repertoire
+tidy {'clean-file':
+	path=>'/etc/prod',
+	recurse =>1,
+	age => '1w',
+	size=>'1g'
+}
+
+lancer un sercice
+sercice { 'cron' :
+	ensure=>'running'
+	}
+
+service { 'ssh' : 
+	ensure=>'stoppted'
+	}
+
+
+
