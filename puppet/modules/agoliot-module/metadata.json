@@ -1,0 +1,14 @@
+{
+  "name": "agoliot-module",
+  "version": "0.1.0",
+  "author": "agoliot",
+  "summary": "no",
+  "license": "Apache 2.0",
+  "source": "modulea/",
+  "project_page": null,
+  "issues_url": null,
+  "dependencies": [
+    {"version_requirement":">= 1.0.0","name":"puppetlabs-stdlib"}
+  ]
+}
+
