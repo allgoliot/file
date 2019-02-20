@@ -1,0 +1,8 @@
+---
+- name : install de git modafoker
+  hosts: ubuntu
+  remote_user: root
+  tasks:
+   - name: installation de git
+     apt: name=git update-cache=yes
+...
