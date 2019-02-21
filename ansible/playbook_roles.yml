@@ -1,0 +1,17 @@
+---
+- name : install de ubuntu
+  hosts: ubuntu
+  remote_user: root
+  roles:
+   - ubuntu
+- name : install de debian
+  hosts: debian
+  remote_user: root
+  roles:
+   - debian
+- name : install de serveur centos
+  hosts: centos
+  remote_user: root
+  roles:
+   - centos
+...
