@@ -14,7 +14,7 @@
   hosts: debian
   remote_user: root
   tasks:
-   - name: installation de quelques paquets ubuntu/debian
+   - name: installation de quelques paquets debian
      apt: name={{ item }} update-cache=yes
      with_items:
       - vim
@@ -27,7 +27,8 @@
       password: toto 
       shell: /bin/bash 
       comment: lel
-
+   - name: inclusion httpd
+     include: httpd.yml
 - name : install de serveur centos
   hosts: centos
   remote_user: root
