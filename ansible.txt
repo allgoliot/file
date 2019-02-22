@@ -1,0 +1,7 @@
+demarche : 
+
+1- installer ansible 
+2- installer les machines clientes
+3- préparer le fichier hosts
+4- génerer les clef ssh 
+5- verifier la communication entre ansible et les clients
