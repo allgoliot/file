@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ $# == 0 ];then
+	echo "Usage : $0 parametre1"
+else
+
+	for file in *.sh
+	do
+		echo "Traitement de $file"
+		sed -i-e "s/test/e/g" "$file"
+	done
+fi
