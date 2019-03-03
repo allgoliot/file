@@ -15,12 +15,12 @@ static void sighandler(int iSignal)
 }
 
 // Fonction pour afficher les messages de journalisation de libcec
-static int cb_cec_log_message(void* lib, const cec_log_message message)
+static void cb_cec_log_message(void* lib, const cec_log_message* message)
 {
    (void)lib;
 
    const char* strLevel;
-   switch (message.level)
+   switch (message->level)
    {
        case CEC_LOG_ERROR:
            strLevel = "ERROR:   ";
@@ -41,19 +41,28 @@ static int cb_cec_log_message(void* lib, const cec_log_message message)
            break;
     }
 
-    printf("%s[%lld]\t%s\n", strLevel, message.time, message.message);
-    return 0;
+    printf("%s[%lld]\t%s\n", strLevel, message->time, message->message);
 }
 
 // Fonction appelée à chaque appui sur une touche de la télécommande
-static int keyPressHandler(void* lib, const cec_keypress key)
+static void keyPressHandler(void* lib, const cec_keypress* key)
 {
     (void)lib;
 
-    printf("Appui touche détecté : %d pendant %d\n",key.keycode,key.duration);
-    
-    return 0;
+    printf("Appui touche détecté : %d pendant %d\n",key->keycode,key->duration);
 }
+
+// Callbacks (bien faire attention que les callbacks non utilisés soient à NULL)
+static ICECCallbacks        g_callbacks = {
+//    .logMessage           = cb_cec_log_message,
+    .logMessage           = NULL,
+    .keyPress             = keyPressHandler,
+    .commandReceived      = NULL,
+    .configurationChanged = NULL,
+    .alert                = NULL,
+    .menuStateChanged     = NULL,
+    .sourceActivated      = NULL
+};
 
 int main()
 {
@@ -67,18 +76,13 @@ int main()
     libcec_configuration g_config;
     libcec_connection_t g_iface;
     char strPort[10];
-
-    // Configuration des callbacks
-    ICECCallbacks g_callbacks;
-    // g_callbacks.CBCecLogMessage = &cb_cec_log_message;
-    g_callbacks.CBCecKeyPress = &keyPressHandler;
     
     // Configuration de notre instance de libcec
     libcec_clear_configuration(&g_config);
     g_config.clientVersion        = LIBCEC_VERSION_CURRENT;
     g_config.bActivateSource      = 0;
     g_config.callbacks            = &g_callbacks;
-    snprintf(g_config.strDeviceName, sizeof(g_config.strDeviceName), "libCEC test");
+    snprintf(g_config.strDeviceName, sizeof(g_config.strDeviceName), "libCEC4");
     g_config.deviceTypes.types[0] = CEC_DEVICE_TYPE_RECORDING_DEVICE;
     
     // Initialisation
@@ -106,7 +110,7 @@ int main()
     }
     else
     {
-        printf("\n Chemin :    %s\n Port :      %s\n\n", devices[0].path, devices[0].comm);
+        printf("\n Chemin:     %s\n Port:       %s\n\n", devices[0].path, devices[0].comm);
         strcpy(strPort, devices[0].comm);
     }
 
