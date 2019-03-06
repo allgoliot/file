@@ -1,3 +1,3 @@
 #! /bin/bash
 
-docker rm $( docker images -q ) 
+docker rmi $( docker images -q ) 
