@@ -2,6 +2,14 @@
 
 echo "Creation des utilisateurs"
 
+creation(adresse)
+{
+
+	
+
+
+
+}
 
 
 
@@ -14,7 +22,7 @@ echo "Creation des utilisateurs"
 
 
 
-
+read -p "Adresse microsoft (exemple :@Helioskideo.onmicrosoft.com") adresse 
 continuer=0
 while [ $continuer == 0 ]; do
 	
@@ -23,4 +31,5 @@ while [ $continuer == 0 ]; do
 		continuer=1
 		echo $continuer
 	fi
+	continuer(adresse)
 done
