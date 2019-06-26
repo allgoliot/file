@@ -4,8 +4,13 @@
 #permettre au script de s'adapter a un fichier cvs avec x entrée
 #sortir un cvs avec les données 
 
-adresse=@Helioskideo.onmicrosoft.com
+#adresse="@Helioskideo.onmicrosoft.com"
 read -p "Adresse microsoft (defaut: @Helioskideo.onmicrosoft.com) : " adresse 
+if [ $adresse == "" ]; then
+	$adresse="@Helioskideo.onmicrosoft.com"
+fi
+
+echo $adresse
 echo "Creation des utilisateurs"
 
 creation()
